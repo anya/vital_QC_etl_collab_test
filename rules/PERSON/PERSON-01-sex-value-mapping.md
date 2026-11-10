@@ -8,20 +8,15 @@ fields: [person.gender_concept_id, person.gender_source_value, person.gender_sou
 also_tables: []
 depends_on: [GEN-01]
 affects: [PERSON-02]
-supersedes: []
-superseded_by: []
 ratified_on:
-proposed_by: EXAMPLE
 discussion: ""
 ---
 
 # PERSON-01: Sex value mapping
 
-> **EXAMPLE PAGE.** The wording and the choice made here are illustrative,
-> to show the template in use. They have not been discussed or agreed.
-> Verify the concept IDs against the agreed vocabulary version.
->
-> **Status:** draft · [Ask a question](../../../../issues/new?template=question.yml&title=%5BPERSON-01%5D+&rule_id=PERSON-01) · [Propose a change](../../../../issues/new?template=change-request.yml&title=%5BPERSON-01%5D+&rule_id=PERSON-01) · [Past discussion](../../../../issues?q=is%3Aissue+%22PERSON-01%22) · **Last changed:** 2026-11-04
+- [Ask a question](../../../../issues/new?template=question.yml&title=%5BPERSON-01%5D+&rule_id=PERSON-01) 
+- [Propose a change](../../../../issues/new?template=change-request.yml&title=%5BPERSON-01%5D+&rule_id=PERSON-01)
+- [Past discussion](../../../../issues?q=is%3Aissue+%22PERSON-01%22)
 
 ## Rule
 
@@ -35,13 +30,14 @@ discussion: ""
 
 2. The field records **sex as recorded in the source system**, whatever the
    source calls it ("sex", "gender", "sex at birth"). This rule does not
-   distinguish between them. If sites hold both, see PERSON-02.
-3. `person.gender_source_value` MUST contain the original source value
+   distinguish between them. If sites hold both, see PERSON-02. This rule does not cover
+   gender identity, which OMOP stores in OBSERVATION table.
+4. `person.gender_source_value` MUST contain the original source value
    (trimmed), as required by GEN-01.
-4. `person.gender_source_concept_id` MUST be `0` unless the site has a
+5. `person.gender_source_concept_id` MUST be `0` unless the site has a
    source vocabulary loaded in which that value is a concept; then it is
    that concept's ID.
-5. Values that cannot be mapped to the two concepts above are handled by
+6. Values that cannot be mapped to the two concepts above are handled by
    PERSON-02.
 
 ## Examples
@@ -53,14 +49,6 @@ discussion: ""
 | `"f "` | 8532 | `f` | 0 |
 | `"U"` | see PERSON-02 | `U` | 0 |
 
-## Edge cases and out of scope
-
-- Case and whitespace variants of the same code map to the same concept.
-- What to do with values other than male/female is decided in PERSON-02,
-  not here.
-- This rule does not cover gender identity, which OMOP stores elsewhere if
-  at all.
-
 ## Rationale
 
 The CDM expects one value from the Gender domain, and cross-site
@@ -70,8 +58,6 @@ different (but equivalent-looking) concepts.
 
 ### Alternatives considered
 
-- **Leave mapping to each site:** simplest, but cohort definitions then need
-  per-site adjustments.
 - **Use a wider set of concepts from the Gender domain:** may be appropriate
   later, but see PERSON-02.
 
