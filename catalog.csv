@@ -1,0 +1,5 @@
+id,title,type,status,home_table,fields,also_tables,depends_on,affects,superseded_by,ratified_on,revision_issue,discussion,path
+GEN-01,Unmapped and unknown values,global,draft,gen,,,,PERSON-02,,,,,rules/GEN/GEN-01-unmapped-and-unknown-values.md
+OBSERVATION_PERIOD-01,Number of observation periods per person,table,draft,observation_period,observation_period.observation_period_start_date;observation_period.observation_period_end_date,person,,,,,,,rules/OBSERVATION_PERIOD/OBSERVATION_PERIOD-01-periods-per-person.md
+PERSON-01,Sex value mapping,field,draft,person,person.gender_concept_id;person.gender_source_value;person.gender_source_concept_id,,GEN-01,PERSON-02,,,,,rules/PERSON/PERSON-01-sex-value-mapping.md
+PERSON-02,Sex unknown and non-binary values,field,draft,person,person.gender_concept_id;person.gender_source_value,,GEN-01;PERSON-01,,,,,,rules/PERSON/PERSON-02-sex-unknown-handling.md

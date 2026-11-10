@@ -1,0 +1,29 @@
+name: Ask a question
+description: Ask how to apply an existing rule to your data.
+title: "[QUESTION] "
+labels: ["question"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Questions are answered here and closed. If the answer shows the rule is ambiguous, the editor will turn this into a change request.
+        Do not paste patient-level data, real identifiers or small counts.
+  - type: input
+    id: rule_id
+    attributes:
+      label: Rule ID
+      description: For example PERSON-02
+      placeholder: PERSON-02
+    validations:
+      required: true
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: What does your source data look like?
+      description: Invented rows or a description are enough.

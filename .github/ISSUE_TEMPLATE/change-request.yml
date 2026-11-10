@@ -1,0 +1,42 @@
+name: Propose a change
+description: Suggest a change to an existing rule. The rule stays in force while the group decides.
+title: "[CHANGE] "
+labels: ["change-request"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The rule **stays in force** while this is discussed, so sites keep implementing the current text.
+        Put the proposed new wording here, not on the rule page.
+        Do not paste patient-level data, real identifiers or small counts.
+  - type: input
+    id: rule_id
+    attributes:
+      label: Rule ID
+      description: For example PERSON-02
+      placeholder: PERSON-02
+    validations:
+      required: true
+  - type: textarea
+    id: what_is_wrong
+    attributes:
+      label: What is wrong, unclear or missing in the current rule?
+    validations:
+      required: true
+  - type: textarea
+    id: proposed_change
+    attributes:
+      label: Proposed change
+      description: Concrete wording of the new or changed text.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Example showing the problem
+      description: Invented rows or aggregate numbers, and the OMOP output you expect.
+  - type: textarea
+    id: impact
+    attributes:
+      label: Who is affected
+      description: Which sites would need to change their ETL, and would existing output change?

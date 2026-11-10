@@ -1,0 +1,65 @@
+name: Propose a new rule
+description: Suggest a new ETL rule for the group to decide.
+title: "[PROPOSAL] "
+labels: ["proposal"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        **One issue = one question.** If you have two, open two issues.
+        Before you start, search INDEX.md and past issues: the rule may already exist, or may have been rejected.
+        Do not paste patient-level data, real identifiers or small counts. Use invented examples or aggregate numbers.
+  - type: input
+    id: tables_fields
+    attributes:
+      label: OMOP table(s) and field(s) affected
+      description: For example person.gender_concept_id
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: Kind of rule
+      description: If you are not sure, pick the closest one; the editor will adjust.
+      options:
+        - field (how one or more fields are derived)
+        - table (what a row is, which source data creates rows)
+        - relationship (how rows in different tables link)
+        - global (a convention that applies everywhere)
+        - vocabulary (policy about concepts or mapping method)
+        - population (who or what is in scope)
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What goes wrong or stays ambiguous today? Give a concrete example from your source data (invented rows are fine).
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Concrete wording of what the rule should say, even if rough. Include the expected OMOP output for your example.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you considered
+      description: What else could be done, and why not?
+  - type: textarea
+    id: affected
+    attributes:
+      label: Who is affected
+      description: Which sites would need to change their ETL? If you do not know, say so.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: Aggregate counts, CDM specification references, Themis links, related rule IDs.
+  - type: input
+    id: urgency
+    attributes:
+      label: Deadline or milestone, if any
