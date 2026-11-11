@@ -7,6 +7,7 @@ body:
     attributes:
       value: |
         The previously ratified rule **stays in force** while the change is discussed.
+        **One issue = one change.** If you have multile changes to propose, open several issues.
         Put the proposed new wording here, not on the rule page.
         Do not paste patient-level data, real identifiers or small counts.
   - type: input
