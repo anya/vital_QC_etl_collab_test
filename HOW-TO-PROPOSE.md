@@ -5,55 +5,16 @@ browser. Everything below happens through forms on the Issues tab.
 
 ## Which form do I use?
 
-| I want to... | Use | How to get there |
-|---|---|---|
-| Suggest a **new rule** | Propose a new rule | Issues, then New issue, then "Propose a new rule" |
-| Say an existing rule is wrong, unclear or incomplete, and suggest a change | Propose a change | The **Propose a change** link at the top of the rule page |
-| Ask how to apply a rule to my data | Ask a question | The **Ask a question** link at the top of the rule page |
-| See everything already said about a rule | Past discussion | The **Past discussion** link at the top of the rule page |
+| I want to... | How to get there | What happens |
+|:---|:---|:---|
+| Propose a new rule | Issues -><br/>New issue -><br/>**Propose a new rule** | Fill in the form including the the rationale for the rule, concrete wording, examples of expected OMOP output, and related rules. The editor will create a draft page to be reviewed, and will link it to your issue. |
+| Suggest a change to an existing rule | **Propose a change** link on the rule page | While the group decides, **the rule stays in force**. Until accepted, the proposed new wording lives in your issue, not on the page.|
+| Ask a question | **Ask a question** link on the rule page |  Questions are answered in the issue and closed. If the answer shows that the rule is ambiguous, the editor will turn it into a change request.|
 
-The links on a rule page open the right form with the rule ID already filled
-in, which is why they are the preferred route for existing rules.
+## Best practices
 
-## Before you open anything
-
-1. Search [INDEX.md](INDEX.md) and [FIELD-VIEW.md](FIELD-VIEW.md). Is there
-   already a rule, or a rejected or retired one, for this?
-2. For an existing rule, click **Past discussion**. Has it been raised before?
-
-## A new rule
-
-Fill in the form. One issue = one question; if you have two, open two issues.
-
-A proposal that is easy to decide has:
-- a source example that shows the ambiguity (a handful of synthetic rows),
-- the expected output in OMOP for that example,
-- concrete proposed wording, even if rough,
-- the IDs of related rules.
-
-The editor will create a draft page once there is wording to review, and will
-link it to your issue.
-
-## A change to an existing rule
-
-Use the **Propose a change** link. While the group decides, **the rule stays
-in force**, so sites keep implementing the current text. The proposed new
-wording lives in your issue, not on the page.
-
-## A question
-
-Use the **Ask a question** link. Questions are answered in the issue and
-closed. If the answer shows that the rule is ambiguous, the editor will turn
-it into a change request.
-
-## Commenting on someone else's issue
-
-- Say which site you speak for.
-- If you cannot implement the proposal, say why (this may become a recorded
-  deviation if the rule is ratified).
-- Propose alternative wording rather than only objecting.
-
-## Privacy
-
-Never paste patient-level data, real identifiers, or small counts into an
-issue. Use invented examples or aggregate numbers.
+- Before proposing a new rule, always search [INDEX.md](INDEX.md) and [FIELD-VIEW.md](FIELD-VIEW.md). Is there already a rule, or a rejected or retired one, for this?
+- For an existing rule, check **Past discussion** link at the top of the page. Has your issue been raised before?
+- When commenting on someone else's issue, say which site you speak for and propose alternative wording rather than only objecting
+- If you cannot implement the proposed rule or change, explain why (this may become a recorded deviation if the rule is ratified)
+- Never paste patient-level data into an issue. Use invented examples or aggregate numbers.
