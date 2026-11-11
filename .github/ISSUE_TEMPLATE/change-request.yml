@@ -14,8 +14,8 @@ body:
     id: rule_id
     attributes:
       label: Rule ID
-      description: For example PERSON-02
-      placeholder: PERSON-02
+      description: For example PE02
+      placeholder: PE05
     validations:
       required: true
   - type: textarea
