@@ -12,11 +12,11 @@ ratified_on:
 discussion: ""
 ---
 
-## PE01: Sex value mapping
+[Ask a question](../../../../issues/new?template=question.yml&title=%5BPERSON-01%5D+&rule_id=PE01) |
+[Propose a change](../../../../issues/new?template=change-request.yml&title=%5BPERSON-01%5D+&rule_id=PE01) |
+[Past discussion](../../../../issues?q=is%3Aissue+%22PE01%22)
 
-- [Ask a question](../../../../issues/new?template=question.yml&title=%5BPERSON-01%5D+&rule_id=PE01) 
-- [Propose a change](../../../../issues/new?template=change-request.yml&title=%5BPERSON-01%5D+&rule_id=PE01)
-- [Past discussion](../../../../issues?q=is%3Aissue+%22PE01%22)
+## PE01: Sex value mapping
 
 ### Context
 
@@ -25,7 +25,7 @@ discussion: ""
 ### Rule
 
 - Use the source system field capturing **sex at birth** regardless of how the source calls it ("sex", "gender", "sex at birth").
-- Map source values that can be clearly identified as either Male or Female onto corresponding standard concept IDs to populate `person.gender_concept_id`; map all other values to 0.
+- Map source values that can be clearly identified as either Male or Female onto corresponding standard concept IDs to populate `person.gender_concept_id`; **map all other values to 0**.
 - `person.gender_source_concept_id` MUST be `0` unless the site has a source vocabulary loaded in which that value is a concept; then it is that concept's ID.
 - `person.gender_source_value` MUST contain the original source value (trimmed), as required by GEN01.
 
