@@ -25,7 +25,6 @@ that govern each and the fields that have none).
 | Rule | Title |
 |---|---|
 | [PE01](PE01-sex-value-mapping.md) | Sex: value mapping |
-| [PE02](PE02-sex-unknown-handling.md) | Sex: unknown and non-binary values |
 
 ## Fields with no network rule
 
