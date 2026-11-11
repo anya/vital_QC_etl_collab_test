@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        **One issue = one question.** If you have two, open two issues.
+        **One issue = one rule.** If you have two, open two issues.
         Before you start, search INDEX.md and past issues: the rule may already exist, or may have been rejected.
         Do not paste patient-level data, real identifiers or small counts. Use invented examples or aggregate numbers.
   - type: input
@@ -31,34 +31,22 @@ body:
     validations:
       required: true
   - type: textarea
-    id: problem
-    attributes:
-      label: Problem
-      description: What goes wrong or stays ambiguous today? Give a concrete example from your source data (invented rows are fine).
-    validations:
-      required: true
-  - type: textarea
     id: proposal
     attributes:
       label: Proposal
-      description: Concrete wording of what the rule should say, even if rough. Include the expected OMOP output for your example.
+      description: Concrete wording of what the rule should say, even if rough. Include the expected OMOP output as an example.
     validations:
       required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Justification
+      description: Aggregate counts, CDM specification references, Themis links, related rule IDs.
   - type: textarea
     id: alternatives
     attributes:
       label: Alternatives you considered
       description: What else could be done, and why not?
-  - type: textarea
-    id: affected
-    attributes:
-      label: Who is affected
-      description: Which sites would need to change their ETL? If you do not know, say so.
-  - type: textarea
-    id: evidence
-    attributes:
-      label: Evidence
-      description: Aggregate counts, CDM specification references, Themis links, related rule IDs.
   - type: input
     id: urgency
     attributes:
