@@ -6,7 +6,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        The rule **stays in force** while this is discussed, so sites keep implementing the current text.
+        The previously ratified rule **stays in force** while the change is discussed.
         Put the proposed new wording here, not on the rule page.
         Do not paste patient-level data, real identifiers or small counts.
   - type: input
@@ -35,8 +35,3 @@ body:
     attributes:
       label: Example showing the problem
       description: Invented rows or aggregate numbers, and the OMOP output you expect.
-  - type: textarea
-    id: impact
-    attributes:
-      label: Who is affected
-      description: Which sites would need to change their ETL, and would existing output change?
