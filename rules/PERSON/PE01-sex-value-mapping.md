@@ -12,8 +12,8 @@ ratified_on:
 discussion: ""
 ---
 
-[Ask a question](../../../../issues/new?template=question.yml&title=%5BPERSON-01%5D+&rule_id=PE01) |
-[Propose a change](../../../../issues/new?template=change-request.yml&title=%5BPERSON-01%5D+&rule_id=PE01) |
+[Ask a question](../../../../issues/new?template=question.yml&title=%5BPE01%5D+&rule_id=PE01) |
+[Propose a change](../../../../issues/new?template=change-request.yml&title=%5BPE01%5D+&rule_id=PE01) |
 [Past discussion](../../../../issues?q=is%3Aissue+%22PE01%22)
 
 ## PE01: Sex value mapping
