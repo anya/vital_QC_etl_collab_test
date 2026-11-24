@@ -5,7 +5,7 @@ It is possible to edit a file on the platform's website and save ("commit") stra
 ### Creating a new draft page from a proposal issue
 
 - Create a new `.md` file in the right folder (for example `rules/PERSON/`).
-- Use the following convention for file names: `PE03-short-slug.md`. The number is the next free number for that prefix (check INDEX.md). **Never reuse a number.**
+- Use the following convention for file names: `Pe003-short-slug.md`. The number is the next free number for that prefix (check INDEX.md). **Never reuse a number.**
 - Paste the contents of `TEMPLATE.md`, delete the comment blocks and fill in the sections.
 - Make sure to replace **every** `TABLENN` with the real ID, including in the three links under the title.
 - Set `discussion: "#12"` and the **Origin** link to the proposal issue.
@@ -42,8 +42,8 @@ History button. One line, starting with the rule ID, saying what changed.
 Put the reason in the description. Examples:
 
 ```
-PE02: add "other" to excluded source values
-OP01: ratified (meeting 2026-11-18), gap threshold 548 days
+Pe002: add "other" to excluded source values
+ObPe01: ratified (meeting 2026-11-18), gap threshold 548 days
 README: fix link to governance page
 ```
 
