@@ -1,12 +1,12 @@
 ---
-id: TABLENN                  # e.g. PE01. Use two letters for CDM tables, or: GEN | VOCAB | POP. Number is permanent, never reused.
+id: TblNNN                   # e.g. Pe001, PrOc003. Use two letters for words in CDM table names, or: GEN | VOCAB | POP. Number is permanent, never reused.
 title: Short descriptive title
 type: field                  # field | table | relationship | global | vocabulary | population
 status: draft                # draft | ratified | under-revision | retired | rejected
 home_table: person           # lowercase OMOP table, or: gen | vocab | pop
 fields: []                   # qualified and lowercase, e.g. [person.gender_concept_id]
 also_tables: []              # other tables touched (mainly for relationship rules)
-depends_on: []               # rule IDs this rule relies on, e.g. [GEN01]
+depends_on: []               # rule IDs this rule relies on, e.g. [GEN001]
 affects: []                  # rule IDs that must be reviewed if this one changes
 supersedes: []               # rule IDs this rule replaces (informational)
 superseded_by: []            # only when status = retired and another rule replaces this one
@@ -22,9 +22,9 @@ The links assume the file sits two folders deep (rules/<TABLE>/). The catalog sc
 any placeholder or wrong ID you leave behind.
 -->
 
-[Ask a question](../../../../issues/new?template=question.yml&title=%5BTABLE-NN%5D+&rule_id=TABLENN) | 
-[Propose a change](../../../../issues/new?template=change-request.yml&title=%5BTABLE-NN%5D+&rule_id=TABLENN) |
-[Past discussion](../../../../issues?q=is%3Aissue+%22TABLENN%22)
+[Ask a question](../../../../issues/new?template=question.yml&title=%5BTABLE-NN%5D+&rule_id=TblNNN) | 
+[Propose a change](../../../../issues/new?template=change-request.yml&title=%5BTABLE-NN%5D+&rule_id=TblNNN) |
+[Past discussion](../../../../issues?q=is%3Aissue+%22TblNNN%22)
 
 # TABLENN: Title
 
