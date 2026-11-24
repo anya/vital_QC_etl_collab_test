@@ -71,6 +71,6 @@ and change requests are found through the "Past discussion" link on the page.
 
 ### Rule IDs
 
-`PREFIXNN`, where PREFIX is the two-letter table acronym or `GEN` | `VOCAB` |`POP`, and NN is a
-two-digit number. `00` is reserved for the table overview page. Numbers are never reused.
+`PrEfNNN`, where PrEf is the table acronym (e.g. Pe for PERSON, DrEx for DRUG_EXPOSURE) or `GEN` | `VOCAB` |`POP`, 
+and NNN is a three-digit number. `000` is reserved for the table overview page. Numbers are never reused!
 
