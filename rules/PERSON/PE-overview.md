@@ -1,5 +1,5 @@
 ---
-id: PE00
+id: Pe-overview
 title: PERSON table overview
 type: hub
 home_table: person
@@ -24,7 +24,7 @@ that govern each and the fields that have none).
 
 | Rule | Title |
 |---|---|
-| [PE01](PE01-sex-value-mapping.md) | Sex: value mapping |
+| [Pe001](Pe001-sex-value-mapping.md) | Sex: value mapping |
 
 ## Fields with no network rule
 

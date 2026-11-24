@@ -1,5 +1,5 @@
 ---
-id: OBSERVATION_PERIOD-00
+id: ObPe-overview
 title: OBSERVATION_PERIOD table overview
 type: hub
 home_table: observation_period
@@ -23,7 +23,7 @@ See the generated [INDEX.md](../../INDEX.md) and
 
 | Rule | Title |
 |---|---|
-| [OBSERVATION_PERIOD-01](OBSERVATION_PERIOD-01-periods-per-person.md) | Number of observation periods per person |
+| [ObPe001](ObPe001-periods-per-person.md) | Number of observation periods per person |
 
 ## Related rules to be proposed
 

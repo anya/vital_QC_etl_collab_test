@@ -5,6 +5,12 @@ and check the repository for consistency.
 Run from the repository root:  python scripts/build_catalog.py
 Exit code 1 if any error was found.
 Requires Python 3 and PyYAML (pip install pyyaml).
+
+Naming conventions enforced
+  Rule page      rules/<FOLDER>/PE01-short-slug.md      header  id: PE01
+  Overview page  rules/<FOLDER>/PE-overview.md          header  id: PE-overview, type: hub
+  <FOLDER> is either the prefix (PE) or the full table name in capitals (PERSON).
+  The prefix of every ID must be listed in PREFIX_LIST below.
 """
 import csv
 import re
@@ -14,6 +20,42 @@ from pathlib import Path
 from urllib.parse import unquote
 
 import yaml
+
+# ---------------------------------------------------------------------------
+# EDIT THIS LIST when a table gets its first rule page.
+# (prefix, home_table): prefix is 2 to 5 letters, upper or lower case, written
+# exactly as it appears in IDs and file names (for example "PrOc"). home_table is
+# the lowercase OMOP table name, or one of gen / vocab / pop. Each prefix must be
+# unique, ignoring case (Windows and macOS treat PE and Pe as the same name), and
+# each table has one prefix.
+# Watch for clashes: DEATH and DRUG_EXPOSURE cannot both be "DE".
+# ---------------------------------------------------------------------------
+PREFIX_LIST = [
+    ("Pe", "person"),
+    ("ViOc", "visit_occurrence"),
+    ("ViDe", "visit_detail"),
+    ("ObPe", "observation_period"),
+    ("CaSi", "care_site"),
+    ("Lo", "location"),
+    ("LoHi", "location_history"),
+    ("De", "death"),
+    ("CoOc", "condition_occurrence"),
+    ("PrOc", "procedure_occurrence"),
+    ("DrEx", "drug_exposure"),
+    ("DeEx", "device_exposure"),
+    ("Me", "measurement"),
+    ("Ob", "observation"),
+    ("Sp", "specimen"),
+    ("FaRe", "fact_relationship"),
+    ("Pr", "provider"),
+    ("No", "note"),
+    ("NoNl", "note_nlp"),
+    ("GEN", "gen"),
+    ("VOCAB", "vocab"),
+    ("POP", "pop"),
+]
+NUM_DIGITS = 3            # N digits in rule numbering: Pe001
+HUB_SUFFIX = "-overview"  # Overview page format: PE-overview.md
 
 ROOT = Path(__file__).resolve().parent.parent
 RULES_DIR = ROOT / "rules"
@@ -26,15 +68,43 @@ CLOSED = {"retired", "rejected"}
 SHOWN_IN_FIELD_VIEW = {"draft", "ratified", "under-revision"}
 TYPES = {"field", "table", "relationship", "global", "vocabulary", "population", "hub"}
 SITE_STATUSES = {"not-started", "in-progress", "implemented", "deviation", "not-applicable"}
-SPECIAL_TABLES = {"gen", "vocab", "pop"}
 LIST_KEYS = ["fields", "also_tables", "depends_on", "affects", "supersedes", "superseded_by"]
 REQUIRED = ["id", "title", "type", "status", "home_table"]
-ID_RE = re.compile(r"^[A-Z_]+-\d{2}$")
-ID_IN_TEXT = re.compile(r"\b[A-Z][A-Z_]*-\d{2}\b")
 FIELD_RE = re.compile(r"^[a-z_]+\.[a-z_0-9]+$")
 LINK_RE = re.compile(r"\]\(([^)\s]+)\)")
-PLACEHOLDERS = ["TABLE-NN", "YYYY-MM-DD", "#NN", "#__"]
-ISSUE_LINK_PREFIX = "../../../../issues"  # pages live in rules/<TABLE>/, two folders deep
+PLACEHOLDERS = ["TABLE-NN", "XXNN", "YYYY-MM-DD", "#NN", "#__"]
+ISSUE_LINK_PREFIX = "../../../../issues"  # pages live in rules/<FOLDER>/, two folders deep
+
+
+def build_prefix_maps():
+    to_table, to_prefix = {}, {}
+    for prefix, table in PREFIX_LIST:
+        if not re.fullmatch(r"[A-Za-z]{2,5}", prefix):
+            sys.exit(f"PREFIX_LIST: '{prefix}' must be 2 to 5 letters")
+        for other in to_table:
+            if other.lower() == prefix.lower() and other != prefix:
+                sys.exit(f"PREFIX_LIST: '{other}' and '{prefix}' differ only by case; Windows and "
+                         "macOS treat file and folder names that differ only by case as the same")
+        if table != table.lower():
+            sys.exit(f"PREFIX_LIST: table '{table}' must be lowercase")
+        if prefix in to_table:
+            sys.exit(f"PREFIX_LIST: prefix '{prefix}' is used twice "
+                     f"({to_table[prefix]} and {table})")
+        if table in to_prefix:
+            sys.exit(f"PREFIX_LIST: table '{table}' has two prefixes "
+                     f"({to_prefix[table]} and {prefix})")
+        to_table[prefix] = table
+        to_prefix[table] = prefix
+    return to_table, to_prefix
+
+
+PREFIX_TO_TABLE, TABLE_TO_PREFIX = build_prefix_maps()
+_PREFIX_ALT = "|".join(sorted(PREFIX_TO_TABLE, key=len, reverse=True))
+RULE_ID_RE = re.compile(rf"^([A-Za-z]{{2,5}})(\d{{{NUM_DIGITS}}})$")
+HUB_ID_RE = re.compile(rf"^([A-Za-z]{{2,5}}){re.escape(HUB_SUFFIX)}$")
+# Case-insensitive on purpose: a link that spells an ID with the wrong case (proc01 for PrOc01)
+# is reported as a mismatch instead of slipping through.
+ID_IN_TEXT = re.compile(rf"\b(?:{_PREFIX_ALT})\d{{{NUM_DIGITS}}}\b", re.IGNORECASE)
 
 errors = []
 warnings = []
@@ -76,6 +146,43 @@ def as_list(value):
     return [str(value)]
 
 
+def check_id_and_location(rel, path, rid, is_hub, home):
+    """Checks tied to the naming convention: id shape, file name, prefix, folder, home_table."""
+    if is_hub:
+        m = HUB_ID_RE.match(rid)
+        if not m:
+            err(rel, f"overview page id should look like PE{HUB_SUFFIX} "
+                     f"(prefix + '{HUB_SUFFIX}'), got '{rid}'")
+        elif rid != path.stem:
+            err(rel, f"id '{rid}' should equal the file name without .md ('{path.stem}')")
+    else:
+        m = RULE_ID_RE.match(rid)
+        if not m:
+            err(rel, f"id '{rid}' does not look like PE01 "
+                     f"(2 to 5 letter prefix + {NUM_DIGITS} digits, no dash)")
+        elif not path.name.startswith(rid + "-"):
+            err(rel, f"file name should start with '{rid}-' (for example {rid}-short-slug.md)")
+    if not m:
+        return
+    prefix = m.group(1)
+    table = PREFIX_TO_TABLE.get(prefix)
+    if table is None:
+        same_but_case = [p for p in PREFIX_TO_TABLE if p.lower() == prefix.lower()]
+        if same_but_case:
+            err(rel, f"prefix '{prefix}' has the wrong case: PREFIX_LIST spells it "
+                     f"'{same_but_case[0]}'")
+        else:
+            err(rel, f"unknown prefix '{prefix}': add it to PREFIX_LIST at the top of "
+                     "scripts/build_catalog.py")
+        return
+    if home and home != table:
+        err(rel, f"home_table is '{home}' but prefix {prefix} stands for '{table}'")
+    allowed_folders = {prefix, table.upper()}
+    if path.parent.name not in allowed_folders:
+        err(rel, f"folder '{path.parent.name}' does not match prefix {prefix} "
+                 f"(expected {' or '.join(sorted(allowed_folders))})")
+
+
 def load_rules():
     rules = {}
     for path in sorted(RULES_DIR.rglob("*.md")):
@@ -87,14 +194,20 @@ def load_rules():
         if data is None:
             continue
         rtype = data.get("type")
-        is_hub = rtype == "hub"
+        name_is_hub = path.name.endswith(HUB_SUFFIX + ".md")
+        is_hub = name_is_hub or rtype == "hub"
+        if rtype is not None and (rtype == "hub") != name_is_hub:
+            if rtype == "hub":
+                err(rel, f"type is hub but the file name does not end with '{HUB_SUFFIX}.md'")
+            else:
+                err(rel, f"file name ends with '{HUB_SUFFIX}.md' but type is '{rtype}', not hub")
         for key in REQUIRED:
             if key == "status" and is_hub:
                 continue  # overview pages are guides, not rules
             if not data.get(key):
                 err(rel, f"missing required header field '{key}'")
         rid = str(data.get("id", ""))
-        entry = {"path": rel, "data": data, "id": rid, "text": text}
+        entry = {"path": rel, "data": data, "id": rid, "text": text, "is_hub": is_hub}
         for key in LIST_KEYS:
             entry[key] = as_list(data.get(key))
 
@@ -120,21 +233,13 @@ def load_rules():
             if "## Change log" not in text:
                 warn(rel, "no '## Change log' section")
 
-        if rid:
-            if not ID_RE.match(rid):
-                err(rel, f"id '{rid}' does not look like PREFIX-NN")
-            if not path.name.startswith(rid):
-                err(rel, f"file name should start with the id '{rid}'")
-            prefix = rid.rsplit("-", 1)[0]
-            if path.parent.name != prefix:
-                err(rel, f"id prefix '{prefix}' does not match folder '{path.parent.name}'")
-            if rid in rules:
-                err(rel, f"duplicate id {rid} (also in {rules[rid]['path']})")
         home = str(data.get("home_table", ""))
         if home and home != home.lower():
             err(rel, f"home_table '{home}' must be lowercase")
-        if home and home not in SPECIAL_TABLES and rid and path.parent.name.lower() != home:
-            err(rel, f"home_table '{home}' does not match folder '{path.parent.name}'")
+        if rid:
+            check_id_and_location(rel, path, rid, is_hub, home)
+            if rid in rules:
+                err(rel, f"duplicate id {rid} (also in {rules[rid]['path']})")
         for f in entry["fields"]:
             if not FIELD_RE.match(f):
                 err(rel, f"field '{f}' must be qualified and lowercase, e.g. person.gender_concept_id")
@@ -205,7 +310,7 @@ def status_cell(r):
 
 
 def write_catalog(rules):
-    real = [r for r in rules.values() if r["data"].get("type") != "hub"]
+    real = [r for r in rules.values() if not r["is_hub"]]
     real.sort(key=lambda r: (r["data"].get("home_table", ""), r["id"]))
     columns = ["id", "title", "type", "status", "home_table", "fields", "also_tables",
                "depends_on", "affects", "superseded_by", "ratified_on", "revision_issue",
@@ -262,7 +367,7 @@ def write_catalog(rules):
 
 
 def write_field_view(rules):
-    real = [r for r in rules.values() if r["data"].get("type") != "hub"]
+    real = [r for r in rules.values() if not r["is_hub"]]
     by_field = defaultdict(list)
     for r in real:
         for f in r["fields"]:
@@ -339,9 +444,11 @@ def check_page_texts(rules):
                 if not target.startswith(ISSUE_LINK_PREFIX):
                     err(rel, f"issue link '{target}' should start with {ISSUE_LINK_PREFIX} "
                              "(pages live two folders deep)")
-                for other in set(ID_IN_TEXT.findall(unquote(target))):
-                    if other != rid:
-                        err(rel, f"link mentions {other} but this page is {rid} (copied from another page?)")
+                if not r["is_hub"]:
+                    for other in set(ID_IN_TEXT.findall(unquote(target))):
+                        if other != rid:
+                            err(rel, f"link mentions {other} but this page is {rid} "
+                                     "(copied from another page?)")
                 continue
             path_part = target.split("#", 1)[0]
             if path_part and not ((ROOT / rel).parent / path_part).resolve().exists():

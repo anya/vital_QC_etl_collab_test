@@ -1,5 +1,5 @@
 ---
-id: OBSERVATION_PERIOD-01
+id: ObPe001
 title: Number of observation periods per person
 type: table
 status: draft
@@ -15,13 +15,13 @@ proposed_by: EXAMPLE
 discussion: ""
 ---
 
-# OBSERVATION_PERIOD-01: Number of observation periods per person
+# ObPe001: Number of observation periods per person
 
 > **EXAMPLE PAGE.** This page shows how a genuinely open design question
 > can be laid out for the group. The "proposed rule" is a placeholder for
 > discussion, not a recommendation or an agreed position.
 >
-> **Status:** draft · [Ask a question](../../../../issues/new?template=question.yml&title=%5BOBSERVATION_PERIOD-01%5D+&rule_id=OBSERVATION_PERIOD-01) · [Propose a change](../../../../issues/new?template=change-request.yml&title=%5BOBSERVATION_PERIOD-01%5D+&rule_id=OBSERVATION_PERIOD-01) · [Past discussion](../../../../issues?q=is%3Aissue+%22OBSERVATION_PERIOD-01%22) · **Last changed:** 2026-11-04
+> **Status:** draft · [Ask a question](../../../../issues/new?template=question.yml&title=%5BObPe001%5D+&rule_id=ObPe001) · [Propose a change](../../../../issues/new?template=change-request.yml&title=%5BObPe001%5D+&rule_id=ObPe001) · [Past discussion](../../../../issues?q=is%3Aissue+%22ObPe001%22) · **Last changed:** 2026-11-04
 
 ## Rule (proposed wording, to be decided)
 

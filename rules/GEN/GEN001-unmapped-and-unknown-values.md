@@ -1,5 +1,5 @@
 ---
-id: GEN-01
+id: GEN001
 title: Unmapped and unknown values
 type: global
 status: draft
@@ -7,7 +7,7 @@ home_table: gen
 fields: []
 also_tables: []
 depends_on: []
-affects: [PERSON-02]
+affects: []
 supersedes: []
 superseded_by: []
 ratified_on:
@@ -15,12 +15,12 @@ proposed_by: EXAMPLE
 discussion: ""
 ---
 
-# GEN-01: Unmapped and unknown values
+# GEN001: Unmapped and unknown values
 
 > **EXAMPLE PAGE.** Wording is illustrative, to show the template in use.
 > It has not been discussed or agreed by the workgroup.
 >
-> **Status:** draft · [Ask a question](../../../../issues/new?template=question.yml&title=%5BGEN-01%5D+&rule_id=GEN-01) · [Propose a change](../../../../issues/new?template=change-request.yml&title=%5BGEN-01%5D+&rule_id=GEN-01) · [Past discussion](../../../../issues?q=is%3Aissue+%22GEN-01%22) · **Last changed:** 2026-11-04
+> **Status:** draft · [Ask a question](../../../../issues/new?template=question.yml&title=%5BGEN001%5D+&rule_id=GEN001) · [Propose a change](../../../../issues/new?template=change-request.yml&title=%5BGEN001%5D+&rule_id=GEN001) · [Past discussion](../../../../issues?q=is%3Aissue+%22GEN001%22) · **Last changed:** 2026-11-04
 
 ## Rule
 

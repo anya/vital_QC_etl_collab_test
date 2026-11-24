@@ -1,22 +1,22 @@
 ---
-id: PE01
+id: Pe001
 title: Sex value mapping
 type: field
 status: draft
 home_table: person
 fields: [person.gender_concept_id, person.gender_source_value, person.gender_source_concept_id]
 also_tables: []
-depends_on: [GEN01]
-affects: [PE02]
+depends_on: [GEN001]
+affects: []
 ratified_on:
 discussion: ""
 ---
 
-[Ask a question](../../../../issues/new?template=question.yml&title=%5BPE01%5D+&rule_id=PE01) |
-[Propose a change](../../../../issues/new?template=change-request.yml&title=%5BPE01%5D+&rule_id=PE01) |
-[Past discussion](../../../../issues?q=is%3Aissue+%22PE01%22)
+[Ask a question](../../../../issues/new?template=question.yml&title=%5BPe001%5D+&rule_id=Pe001) |
+[Propose a change](../../../../issues/new?template=change-request.yml&title=%5BPE01%5D+&rule_id=Pe001) |
+[Past discussion](../../../../issues?q=is%3Aissue+%22Pe001%22)
 
-## PE01: Sex value mapping
+## Pe001: Sex value mapping
 
 ### Context
 
