@@ -1,9 +1,8 @@
 # Site conformance
 
-`conformance.csv` has one row per rule per site. It is the answer to "are we
-actually harmonized?". Open it in a spreadsheet to filter and sort. The CSV
-format is used so changes show clearly in the History view; each site
-representative updates their own rows (through the browser editor).
+`conformance.csv` has one row per rule per site/province. It is the answer to "are we
+actually harmonized?". Each site representative updates their own rows (can be done directly in the browser editor). 
+The CSV format is used so changes show clearly in the History view; 
 
 Rows are added when a rule is ratified (status `not-started` for each site).
 When a rule is retired, its rows become `not-applicable`.
@@ -13,7 +12,7 @@ Columns:
 | Column | Values |
 |---|---|
 | `rule_id` | A rule ID such as `PERSON-01` |
-| `site` | `site-a` ... (rename to the real site codes) |
+| `site` | (Need a complete list of participating teams: sites or provinces) |
 | `status` | `not-started`, `in-progress`, `implemented`, `deviation`, `not-applicable` |
 | `deviation_reason` | Required when status is `deviation` |
 | `ruleset_version` | The release tag the site implements, e.g. `ruleset-v0.1` |
